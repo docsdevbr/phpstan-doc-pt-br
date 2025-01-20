@@ -1,0 +1,53 @@
+### config ###
+
+# See https://www.mkdocs.org/user-guide/configuration/.
+
+INHERIT: !ENV MKDOCS_BASE_CONFIG
+
+### navigation ###
+
+nav:
+  - User Guide:
+      - getting-started.md
+      - command-line-usage.md
+      - rule-levels.md
+      - baseline.md
+      - discovering-symbols.md
+      - output-format.md
+      - ignoring-errors.md
+      - stub-files.md
+      - troubleshooting-types.md
+      - result-cache.md
+      - extension-library.md
+      - backward-compatibility-promise.md
+  - config-reference.md
+  - Writing PHP Code:
+      - phpdocs-basics.md
+      - phpdoc-types.md
+      - solving-undefined-variables.md
+      - narrowing-types.md
+  - Developing Extensions:
+      - extension-types.md
+      - core-concepts.md
+      - abstract-syntax-tree.md
+      - scope.md
+      - type-system.md
+      - trinary-logic.md
+      - reflection.md
+      - dependency-injection-configuration.md
+      - rules.md
+      - collectors.md
+      - error-formatters.md
+      - class-reflection-extensions.md
+      - dynamic-return-type-extensions.md
+      - dynamic-throw-type-extensions.md
+      - type-specifying-extensions.md
+      - custom-phpdoc-types.md
+      - always-read-written-properties.md
+      - always-used-class-constants.md
+      - always-used-methods.md
+      - allowed-subtypes.md
+      - testing.md
+      - result-cache-meta-extensions.md
+      - backward-compatibility-promise.md
+      - [API Reference](https://apiref.phpstan.org/)
