@@ -8,7 +8,7 @@ INHERIT: !ENV MKDOCS_BASE_CONFIG
 
 nav:
   - User Guide:
-      - user-guide/getting-started.md
+      - Começando: user-guide/getting-started.md
       - user-guide/command-line-usage.md
       - user-guide/rule-levels.md
       - user-guide/baseline.md

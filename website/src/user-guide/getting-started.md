@@ -1,55 +1,102 @@
----
-title: Getting Started
----
+<!--
+source_url: https://github.com/phpstan/phpstan/blob/-/website/src/user-guide/getting-started.md
+revision: 65dc199c3c137db0ee1b05cf94c8fe65d53fedbd
+status: ready
+-->
 
-PHPStan requires PHP >= 7.4. You have to run it in environment with PHP 7.x but the actual code does not have to use PHP 7.x features. (Code written for PHP 5.6 and earlier can run on 7.x mostly unmodified.)
+# Começando
 
-PHPStan works best with modern object-oriented code. The more strongly-typed your code is, the more information you give PHPStan to work with.
+PHPStan requer o PHP >= 7.4.
+Você precisa executá-lo em um ambiente com PHP 7.x, mas o código real não
+precisa usar os recursos do PHP 7.x.
+(Código escrito para PHP 5.6 e anteriores pode ser executado no 7.x praticamente
+sem modificações.)
 
-Properly annotated and typehinted code (class properties, function and method arguments, return types) helps not only static analysis tools but also other people that work with the code to understand it.
+O PHPStan funciona melhor com código moderno orientado a objetos.
+Quanto mais fortemente tipado for seu código, mais informações você dará ao
+PHPStan para trabalhar.
 
-Installation
--------------
+Código devidamente anotado e com declaração de tipo (propriedades de classes,
+argumentos de funções e métodos, tipos de retorno) ajuda não apenas ferramentas
+de análise estática, mas também outras pessoas que trabalham com o código a
+entendê-lo.
 
-To start performing analysis on your code, require PHPStan in [Composer](https://getcomposer.org/):
+## Instalação
+
+Para começar a executar a análise no seu código, instale o PHPStan com o
+[Composer][1]:
 
 ```bash
 composer require --dev phpstan/phpstan
 ```
 
-Composer will install PHPStan's executable in its `bin-dir` which defaults to `vendor/bin`.
+O Composer instalará o executável do PHPStan em seu `bin-dir`, cujo padrão é
+`vendor/bin`.
 
-You can also download the [latest PHAR](https://github.com/phpstan/phpstan/releases) and just use that. But without Composer, you won't be able to install and use [PHPStan extensions](extension-library.md).
+Você também pode baixar o [PHAR mais recente][2] e usá-lo.
+Mas sem o Composer, você não poderá instalar e usar as
+[extensões do PHPStan][3].
 
-[Head here](docker.md) if you want to use PHPStan in Docker.
+[Acesse aqui][4] se quiser usar o PHPStan no Docker.
 
-First run
--------------
+## Primeira execução
 
-To let PHPStan analyse your codebase, you have to use the `analyse` command and point it to the right directories.
+Para deixar o PHPStan analisar sua base de código, você precisa usar o comando
+`analyse` e apontá-lo para os diretórios certos.
 
-So, for example if you have your classes in directories `src` and `tests`, you can run PHPStan like this:
+Então, por exemplo, se você tem suas classes nos diretórios `src` e `tests`,
+você pode executar o PHPStan assim:
 
-```bash
+```shell
 vendor/bin/phpstan analyse src tests
 ```
 
-<div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4" role="alert">
+> **Info**:
+> Você deve analisar apenas arquivos com o código que você escreveu.
+> Não há necessidade de analisar o diretório `vendor` com dependências de
+> terceiros porque não está em seu poder corrigir todos os erros cometidos pelas
+> pessoas desenvolvedoras com as quais você não trabalha diretamente.
+>
+> Sim, o PHPStan precisa saber sobre todas as classes, interfaces, traits e
+> funções que seu código usa, mas isso é obtido por meio da
+> [descoberta de símbolos][5], não pela inclusão dos arquivos na análise.
 
-You should only analyse files with the code you've written yourself. There's no need to analyse the `vendor` directory with 3rd party dependencies because it's not in your power to fix all the mistakes made by the developers you don't work with directly.
+[Saiba mais sobre opções de linha de comando.][6]
 
-Yes, PHPStan needs to know about all the classes, interfaces, traits, and functions your code uses, but that's achieved through [discovering symbols](discovering-symbols.md), not by including the files in the analysis.
-</div>
+O PHPStan provavelmente encontrará alguns erros, mas não se preocupe, pode estar
+tudo bem com seu código.
+Erros encontrados na primeira execução tendem a ser:
 
-[Learn more about command line options »](command-line-usage.md)
+* Argumentos extras passados para funções (por exemplo, a função requer dois
+  argumentos, o código passa três)
+* Argumentos extras passados para funções `print`/`sprintf` (por exemplo, a
+  string de formato contém um espaço reservado, o código passa dois valores para
+  substituir)
+* Erros óbvios em código morto
+* Símbolos desconhecidos - como "classe não encontrada".
+  Consulte [Descobrindo símbolos][7] para mais detalhes.
 
-PHPStan will probably find some errors, but don't worry, your code might be just fine. Errors found on the first run tend to be:
+**Por padrão, o PHPStan executa apenas as verificações mais básicas.
+Acesse para [Níveis de regras][8] para aprender como ativar verificações mais
+rigorosas.**
 
-* Extra arguments passed to functions (e. g. function requires two arguments, the code passes three)
-* Extra arguments passed to print/sprintf functions (e. g. format string contains one placeholder, the code passes two values to replace)
-* Obvious errors in dead code
-* Unknown symbols - like "class not found". See [Discovering Symbols](discovering-symbols.md) for more details.
+**Aprenda sobre todas as opções de configuração na
+[Referência de configuração][9].**
 
-**By default, PHPStan runs only the most basic checks. Head to [Rule Levels](rule-levels.md) to learn how to turn on stricter checks.**
+[1]: https://getcomposer.org/
 
-**Learn about all the configuration options in the [Config Reference](../config-reference.md).**
+[2]: https://github.com/phpstan/phpstan/releases
+
+[3]: extension-library.md
+
+[4]: docker.md
+
+[5]: discovering-symbols.md
+
+[6]: command-line-usage.md
+
+[7]: discovering-symbols.md
+
+[8]: rule-levels.md
+
+[9]: ../config-reference.md
