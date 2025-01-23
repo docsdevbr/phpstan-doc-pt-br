@@ -61,7 +61,7 @@ vendor/bin/phpstan analyse src tests
 > funções que seu código usa, mas isso é obtido por meio da
 > [descoberta de símbolos][5], não pela inclusão dos arquivos na análise.
 
-[Saiba mais sobre opções de linha de comando.][6]
+[Saiba mais sobre as opções de linha de comando.][6]
 
 O PHPStan provavelmente encontrará alguns erros, mas não se preocupe, pode estar
 tudo bem com seu código.
@@ -77,7 +77,7 @@ Erros encontrados na primeira execução tendem a ser:
   Consulte [Descobrindo símbolos][7] para mais detalhes.
 
 **Por padrão, o PHPStan executa apenas as verificações mais básicas.
-Acesse para [Níveis de regras][8] para aprender como ativar verificações mais
+Acesse [Níveis de regras][8] para aprender como ativar verificações mais
 rigorosas.**
 
 **Aprenda sobre todas as opções de configuração na
