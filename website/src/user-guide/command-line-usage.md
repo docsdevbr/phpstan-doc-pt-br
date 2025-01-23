@@ -1,189 +1,288 @@
----
-title: Command Line Usage
----
+<!--
+source_url: https://github.com/phpstan/phpstan/blob/-/website/src/user-guide/command-line-usage.md
+revision: 7632b4cee8b50846e3f2cc2c2c86681cb699c22b
+status: ready
+-->
 
-PHPStan's executable file is installed in Composer's `bin-dir` which defaults to `vendor/bin`.
+# Uso da linha de comando
 
-Analysing code
---------------
+O arquivo executável do PHPStan é instalado no diretório `bin-dir` do Composer,
+cujo padrão é `vendor/bin`.
 
-To analyse your code, run the `analyse` command. Exit code 0 means there are no errors.
+## Analisando código
 
-```bash
+Para analisar seu código, execute o comando `analyse`.
+O código de saída `0` significa que não há erros.
+
+```shell
 vendor/bin/phpstan analyse [options] [<paths>...]
 ```
 
-As **`<paths>`** you can pass one or multiple paths to PHP files or directories separated by spaces. When looking for files in directories, various [configuration options](../config-reference.md#analysed-files) are respected. Relative paths are resolved based on the current working directory.
+Como **`<paths>`** você pode passar um ou vários caminhos para arquivos PHP ou
+diretórios separados por espaços.
+Ao procurar por arquivos em diretórios, várias [opções de configuração][1] são
+respeitadas.
+Caminhos relativos são resolvidos com base no diretório de trabalho atual.
 
-### `--level|-l`
+### `--level|-l` {: #--level-l }
 
-Specifies the [rule level](rule-levels.md) to run.
+Especifica o [nível de regra][2] a ser executado.
 
-### `--configuration|-c`
+### `--configuration|-c` {: #--configuration-c }
 
-Specifies the path to a [configuration file](../config-reference.md). Relative paths are resolved based on the current working directory.
+Especifica o caminho para um [arquivo de configuração][3].
+Caminhos relativos são resolvidos com base no diretório de trabalho atual.
 
-### `--generate-baseline|-b`
+### `--generate-baseline|-b` {: #--generate-baseline-b }
 
-Generates [the baseline](baseline.md) to a file. Accepts a path (`--generate-baseline foo.neon`) which defaults to `phpstan-baseline.neon`. Relative paths are resolved based on the current working directory.
+Gera o arquivo da [linha de base][4].
+Aceita um caminho (`--generate-baseline foo.neon`) cujo padrão é
+`phpstan-baseline.neon`.
+Caminhos relativos são resolvidos com base no diretório de trabalho atual.
 
-If you already use the baseline, the path to the baseline file should match the one already in use. This guarantees that the baseline isn't double-used and that the command functions correctly.
+Se você já usa a linha de base, o caminho para o arquivo da linha de base deve
+corresponder ao que já está em uso.
+Isso garante que a linha de base não seja usada duas vezes e que o comando
+funcione corretamente.
 
-Please note that the exit code differs in this case. Exit code 0 means that the baseline generation was successful and the baseline is not empty. If there are no errors that the baseline would consist of, the exit code is 1.
+Observe que o código de saída é diferente neste caso.
+O código de saída `0` significa que a geração da linha de base foi bem-sucedida
+e a linha de base não está vazia.
+Se não houver erros que resultariam na geração da linha de base, o código de
+saída é `1`.
 
-By default PHPStan will not generate an empty baseline. However you can pass `--allow-empty-baseline` alongside `--generate-baseline` to allow an empty baseline file to be generated.
+Por padrão, o PHPStan não gerará uma linha de base vazia.
+No entanto, você pode passar `--allow-empty-baseline` junto com
+`--generate-baseline` para permitir que um arquivo de linha de base vazio seja
+gerado.
 
-### `--pro`
+### `--pro` {: #--pro }
 
-Launches [PHPStan Pro](https://phpstan.orghttps://phpstan.org/blog/introducing-phpstan-pro){.phpstan-pro-label} which lets you browse errors (including ignored errors) in a beautiful web UI. Try it out by running PHPStan with `--pro` or by going to [account.phpstan.com](https://account.phpstan.com/) and creating an account.
+Inicia o [PHPStan Pro][5] que permite que você navegue por erros (incluindo
+erros ignorados) em uma bela interface de pessoa usuária web.
+Experimente executando o PHPStan com `--pro` ou indo para
+[account.phpstan.com][6] e criando uma conta.
 
-<video class="w-full aspect-[1652/1080] mb-8 border border-gray-200 rounded-lg overflow-hidden" autoplay muted loop playsinline poster="/tmp/images/phpstan-pro-browsing-poster.jpg">
-  <source src="/tmp/images/phpstan-pro-browsing.mp4" type="video/mp4">
-</video>
+### `--autoload-file|-a` {: #--autoload-file-a }
 
-### `--autoload-file|-a`
+Se sua aplicação usa um carregador automático personalizado, você deve
+configurá-lo e registrá-lo em um arquivo PHP que é passado para esta opção da
+CLI.
+Caminhos relativos são resolvidos com base no diretório de trabalho atual.
 
-If your application uses a custom autoloader, you should set it up and register in a PHP file that is passed to this CLI option. Relative paths are resolved based on the current working directory.
+[Saiba mais »][7]
 
-[Learn more »](discovering-symbols.md)
+### `--error-format` {: #--error-format }
 
-### `--error-format`
+Especifica um formatador de erro personalizado.
+[Saiba mais sobre formatos de saída »][8]
 
-Specifies a custom error formatter. [Learn more about output formats »](output-format.md)
+### `--no-progress` {: #--no-progress }
 
-### `--no-progress`
+Desativa a barra de progresso.
+Não aceita nenhum valor.
 
-Turns off the progress bar. Does not accept any value.
+### `--memory-limit` {: #--memory-limit }
 
-### `--memory-limit`
+Especifica o limite de memória no mesmo formato que o `php.ini` aceita.
 
-Specifies the memory limit in the same format `php.ini` accepts.
+Exemplo: `--memory-limit 1G`
 
-Example: `--memory-limit 1G`
+### `--xdebug` {: #--xdebug }
 
-### `--xdebug`
+O PHPStan desativa o Xdebug, se estiver habilitado, para obter melhor
+desempenho.
 
-PHPStan turns off Xdebug if it's enabled to achieve better performance.
+Se você precisa depurar o próprio PHPStan ou suas
+[extensões personalizadas][9] e quer executar o PHPStan com o Xdebug habilitado,
+passe esta opção.
+Ela não aceita nenhum valor.
 
-If you need to debug PHPStan itself or your [custom extensions](../developing-extensions/extension-types.md) and want to run PHPStan with Xdebug enabled, pass this option. It does not accept any value.
+### `--debug` {: #--debug }
 
-### `--debug`
+Em vez da barra de progresso, ele emite linhas com cada arquivo analisado antes
+de sua análise.
 
-Instead of the progress bar, it outputs lines with each analysed file before its analysis.
+Além disso, ele para no primeiro erro interno e imprime um rastreamento de
+pilha.
 
-Additionally, it stops on the first internal error and prints a stack trace.
+Esta opção também desabilita o [cache de resultados][10] e o
+[processamento paralelo][11] para fins de depuração.
 
-This option also disables the [result cache](result-cache.md) and [parallel processing](../config-reference.md#parallel-processing) for debugging purposes.
+### `-v`, `-vv`, `-vvv` {: #-v-vv-vvv }
 
-### `-v`, `-vv`, `-vvv`
+Aumenta a verbosidade e faz o PHPStan mostrar várias informações de depuração,
+como memória consumida ou [o motivo do cache de resultados não ser usado][12].
 
-Increases the verbosity and makes PHPStan show various debugging information like consumed memory or [why result cache is not used](result-cache.md#debugging-the-result-cache).
+Combinar `-vvv` com `--debug` é ótimo para [identificar arquivos lentos][13].
 
-Combining `-vvv` with `--debug` is great for [identifying slow files](https://phpstan.org/blog/debugging-performance-identify-slow-files).
+Executar com `-vvv` também imprimirá as mesmas informações que o comando
+[`diagnose`][14].
 
-Running with `-vvv` will also print same information as the [`diagnose` command](command-line-usage.md#diagnose-problems).
+### `--ansi, --no-ansi` {: #--ansi--no-ansi }
 
-### `--ansi, --no-ansi`
+Substitui a detecção automática de se as cores devem ser usadas na saída e o
+quão bonita a barra de progresso deve ser.
 
-Overrides the autodetection of whether colors should be used in the output and how nice the progress bar should be.
+### `--quiet|-q` {: #--quiet-q }
 
-### `--quiet|-q`
+Silencia toda a saída.
+Útil se você tiver interesse apenas no código de saída.
 
-Silences all the output. Useful if you're interested only in the exit code.
+### `--version|-V` {: #--version-v }
 
-### `--version|-V`
+Em vez de executar a análise, ele exibe apenas a versão atual do PHPStan em uso.
 
-Instead of running the analysis, it just outputs the current PHPStan version in use.
+### `--help` {: #--help }
 
-### `--help`
+Exibe um resumo das opções de CLI disponíveis, mas não com tantos detalhes
+quanto esta página.
 
-Outputs a summary of available CLI options, but not as in much detail as this page.
+## Executando sem argumentos
 
-Running without arguments
---------------
+Você pode analisar seu projeto executando apenas `vendor/bin/phpstan` se você
+atender às seguintes condições:
 
-You can analyse your project just by running `vendor/bin/phpstan` if you satisfy the following conditions:
+* Você tem `phpstan.neon` ou `phpstan.neon.dist` no seu diretório de trabalho
+  atual
+* Este arquivo contém o parâmetro [`paths`][1] para definir uma lista de
+  caminhos analisados
+* Este arquivo contém o parâmetro [`level`][15] para definir o nível de regra
+  atual
 
-* You have `phpstan.neon` or `phpstan.neon.dist` in your current working directory
-* This file contains the [`paths`](../config-reference.md#analysed-files) parameter to set a list of analysed paths
-* This file contains the [`level`](../config-reference.md#rule-level) parameter to set the current rule level
+## Limpando o cache de resultados
 
+Para limpar o estado atual do [cache de resultados][10], por exemplo, se você
+estiver desenvolvendo [extensões personalizadas][9] e o cache de resultados
+estiver ficando defasado com muita frequência.
 
-Clearing the result cache
---------------
-
-To clear the current state of the [result cache](result-cache.md), for example if you're developing [custom extensions](../developing-extensions/extension-types.md) and the result cache is getting stale too often.
-
-```bash
+```shell
 vendor/bin/phpstan clear-result-cache [options]
 ```
 
-The `clear-result-cache` command shares some of the options with the `analyse` command. The reason is that the [configuration file](../config-reference.md) might be setting a custom [`tmpDir`](../config-reference.md#caching) which is where the result cache is saved.
+O comando `clear-result-cache` compartilha algumas das opções com o comando
+`analyse`.
+O motivo é que o [arquivo de configuração][3] pode estar definindo um
+[`tmpDir`][16] personalizado, que é onde o cache de resultados é salvo.
 
 ### `--configuration|-c`
 
-Specifies the path to a [configuration file](../config-reference.md). Relative paths are resolved based on the current working directory.
+Especifica o caminho para um [arquivo de configuração][3].
+Caminhos relativos são resolvidos com base no diretório de trabalho atual.
 
 ### `--autoload-file|-a`
 
-If your application uses a custom autoloader, you should set it up and register in a PHP file that is passed to this CLI option. Relative paths are resolved based on the current working directory.
+Se sua aplicação usa um carregador automático personalizado, você deve
+configurá-lo e registrá-lo em um arquivo PHP que é passado para esta opção da
+CLI.
+Caminhos relativos são resolvidos com base no diretório de trabalho atual.
 
-[Learn more »](discovering-symbols.md)
+[Saiba mais »][7]
 
 ### `--memory-limit`
 
-Specifies the memory limit in the same format `php.ini` accepts.
+Especifica o limite de memória no mesmo formato que o `php.ini` aceita.
 
-Example: `--memory-limit 1G`
+Exemplo: `--memory-limit 1G`
 
 ### `--debug`
 
-If the `clear-result-cache` command is failing with an uncaught exception, run it again with `--debug` to see the stack trace.
+Se o comando `clear-result-cache` estiver falhando com uma exceção não
+capturada, execute-o novamente com `--debug` para ver o rastreamento de pilha.
 
 ### `--quiet|-q`
 
-Silences all the output. Useful if you're interested only in the exit code.
+Silencia toda a saída.
+Útil se você tiver interesse apenas no código de saída.
 
 ### `--version|-V`
 
-Instead of clearing the result cache, it just outputs the current PHPStan version in use.
+Em vez de limpar o cache de resultados, ele apenas exibe a versão atual do
+PHPStan em uso.
 
 ### `--help`
 
-Outputs a summary of available CLI options, but not as in much detail as this page.
+Exibe um resumo das opções de CLI disponíveis, mas não com tantos detalhes
+quanto esta página.
 
+## Diagnosticando problemas
 
-Diagnose problems
---------------
+Para diagnosticar o motivo do PHPStan estar se comportando de uma certa maneira,
+você pode executar o comando `diagnose`:
 
-To diagnose why PHPStan is behaving a certain way, you can run the `diagnose` command:
-
-```bash
+```shell
 vendor/bin/phpstan diagnose [options]
 ```
 
-It outputs useful information like current PHP runtime version, current PHP version for analysis (which might be different based on configuration), current PHPStan version etc. Custom extensions can also implement [`DiagnoseExtension interface`](https://apiref.phpstan.org/2.1.x/PHPStan.Diagnose.DiagnoseExtension.html) to add their own information that also gets printed when running the `diagnose` command.
+Ele gera informações úteis como a versão atual do tempo de execução do PHP, a
+versão atual do PHP para análise (que pode ser diferente com base na
+configuração), a versão atual do PHPStan, etc.
+Extensões personalizadas também podem implementar a
+[interface DiagnoseExtension][17] para adicionar suas próprias informações que
+também são impressas ao executar o comando `diagnose`.
 
-The same information is also printed when you run [`analyse` command](command-line-usage.md#analysing-code) with `-vvv`.
+As mesmas informações também são impressas quando você executa o
+[comando `analyse`][18] com `-vvv`.
 
 ### `--configuration|-c`
 
-Specifies the path to a [configuration file](../config-reference.md). Relative paths are resolved based on the current working directory.
+Especifica o caminho para um [arquivo de configuração][3].
+Caminhos relativos são resolvidos com base no diretório de trabalho atual.
 
 ### `--autoload-file|-a`
 
-If your application uses a custom autoloader, you should set it up and register in a PHP file that is passed to this CLI option. Relative paths are resolved based on the current working directory.
+Se sua aplicação usa um carregador automático personalizado, você deve
+configurá-lo e registrá-lo em um arquivo PHP que é passado para esta opção da
+CLI.
+Caminhos relativos são resolvidos com base no diretório de trabalho atual.
 
 ### `--level|-l`
 
-Specifies the [rule level](rule-levels.md) to run.
+Especifica o [nível de regra][2] a ser executado.
 
 ### `--memory-limit`
 
-Specifies the memory limit in the same format `php.ini` accepts.
+Especifica o limite de memória no mesmo formato que o `php.ini` aceita.
 
-Example: `--memory-limit 1G`
+Exemplo: `--memory-limit 1G`
 
 ### `--debug`
 
-Thrown exceptions (internal errors) will not be caught and their stack trace will be printed in full when this option is added.
+Exceções lançadas (erros internos) não serão capturadas e seu rastreamento de
+pilha será impresso na íntegra quando esta opção for adicionada.
+
+[1]: ../config-reference.md#analysed-files
+
+[2]: rule-levels.md
+
+[3]: ../config-reference.md
+
+[4]: baseline.md
+
+[5]: https://phpstan.org/blog/introducing-phpstan-pro
+
+[6]: https://account.phpstan.com/
+
+[7]: discovering-symbols.md
+
+[8]: output-format.md
+
+[9]: ../developing-extensions/extension-types.md
+
+[10]: result-cache.md
+
+[11]: ../config-reference.md#parallel-processing
+
+[12]: result-cache.md#debugging-the-result-cache
+
+[13]: https://phpstan.org/blog/debugging-performance-identify-slow-files
+
+[14]: #diagnose-problems
+
+[15]: ../config-reference.md#rule-level
+
+[16]: ../config-reference.md#caching
+
+[17]: https://apiref.phpstan.org/2.1.x/PHPStan.Diagnose.DiagnoseExtension.html
+
+[18]: #analisando-codigo

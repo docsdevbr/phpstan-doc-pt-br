@@ -27,7 +27,7 @@ parameters:
 
 Relative paths in the `autoload_directories` and `autoload_files` keys are resolved based on the directory of the config file is in.
 
-You can also use a [custom autoloader](command-line-usage.md#--autoload-file%257C-a).
+You can also use a [custom autoloader](command-line-usage.md#--autoload-file-a).
 
 Constants
 -------------

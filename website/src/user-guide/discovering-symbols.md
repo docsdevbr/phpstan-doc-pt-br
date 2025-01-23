@@ -87,7 +87,7 @@ If you're using some other autoloader than the one in Composer, PHPStan can take
 
 You can register the custom autoloader in two ways:
 
-1) By passing the PHP file that registers the autoloader as [`--autoload-file|-a` on the command line](command-line-usage.md#--autoload-file|-a).
+1) By passing the PHP file that registers the autoloader as [`--autoload-file-a` on the command line](command-line-usage.md#--autoload-file-a).
 2) By using the `bootstrapFiles` option:
 
 ```yaml

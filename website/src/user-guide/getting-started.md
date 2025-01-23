@@ -30,8 +30,8 @@ Para começar a executar a análise no seu código, instale o PHPStan com o
 composer require --dev phpstan/phpstan
 ```
 
-O Composer instalará o executável do PHPStan em seu `bin-dir`, cujo padrão é
-`vendor/bin`.
+O Composer instalará o executável do PHPStan no diretório `bin-dir`, cujo padrão
+é `vendor/bin`.
 
 Você também pode baixar o [PHAR mais recente][2] e usá-lo.
 Mas sem o Composer, você não poderá instalar e usar as
@@ -61,7 +61,7 @@ vendor/bin/phpstan analyse src tests
 > funções que seu código usa, mas isso é obtido por meio da
 > [descoberta de símbolos][5], não pela inclusão dos arquivos na análise.
 
-[Saiba mais sobre as opções de linha de comando.][6]
+[Saiba mais sobre as opções de linha de comando »][6]
 
 O PHPStan provavelmente encontrará alguns erros, mas não se preocupe, pode estar
 tudo bem com seu código.
@@ -74,14 +74,14 @@ Erros encontrados na primeira execução tendem a ser:
   substituir)
 * Erros óbvios em código morto
 * Símbolos desconhecidos - como "classe não encontrada".
-  Consulte [Descobrindo símbolos][7] para mais detalhes.
+  Consulte [Descobrindo símbolos][5] para mais detalhes.
 
 **Por padrão, o PHPStan executa apenas as verificações mais básicas.
-Acesse [Níveis de regras][8] para aprender como ativar verificações mais
+Acesse [Níveis de regras][7] para aprender como ativar verificações mais
 rigorosas.**
 
 **Aprenda sobre todas as opções de configuração na
-[Referência de configuração][9].**
+[Referência de configuração][8].**
 
 [1]: https://getcomposer.org/
 
@@ -95,8 +95,6 @@ rigorosas.**
 
 [6]: command-line-usage.md
 
-[7]: discovering-symbols.md
+[7]: rule-levels.md
 
-[8]: rule-levels.md
-
-[9]: ../config-reference.md
+[8]: ../config-reference.md

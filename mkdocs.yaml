@@ -7,9 +7,9 @@ INHERIT: !ENV MKDOCS_BASE_CONFIG
 ### navigation ###
 
 nav:
-  - User Guide:
+  - Guia da pessoa usuária:
       - Começando: user-guide/getting-started.md
-      - user-guide/command-line-usage.md
+      - Uso da linha de comando: user-guide/command-line-usage.md
       - user-guide/rule-levels.md
       - user-guide/baseline.md
       - user-guide/discovering-symbols.md

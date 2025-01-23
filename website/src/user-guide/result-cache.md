@@ -26,7 +26,7 @@ Result cache contents
   * `composer.lock` files hashes
   * [Stub files](stub-files.md) hashes
   * [Bootstrap files](../config-reference.md#bootstrap) hashes
-  * [Autoload file](command-line-usage.md#--autoload-file%7C-a) hash
+  * [Autoload file](command-line-usage.md#--autoload-file-a) hash
   * [Result cache meta extensions](../developing-extensions/result-cache-meta-extensions.md)
 * Errors in the last run
 * Dependency tree of project files. If file `A.php` was modified since the last run, `A.php` and all the files calling or otherwise referencing all the symbols in `A.php` are analysed again.
