@@ -34,7 +34,7 @@ Result cache contents
 Clearing the result cache
 ---------------
 
-To clear the current state of the result cache, for example if you're developing [custom extensions](../developing-extensions/extension-types.md) and the result cache is getting stale too often, you can run the `clear-result-cache` command. [Learn more »](command-line-usage.md#clearing-the-result-cache)
+To clear the current state of the result cache, for example if you're developing [custom extensions](../developing-extensions/extension-types.md) and the result cache is getting stale too often, you can run the `clear-result-cache` command. [Learn more »](command-line-usage.md#limpando-o-cache-de-resultados)
 
 Result cache also gets disabled when running with [`--debug`](command-line-usage.md#--debug).
 

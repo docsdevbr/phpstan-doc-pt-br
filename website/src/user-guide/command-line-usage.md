@@ -277,7 +277,7 @@ pilha será impresso na íntegra quando esta opção for adicionada.
 
 [13]: https://phpstan.org/blog/debugging-performance-identify-slow-files
 
-[14]: #diagnose-problems
+[14]: #diagnosticando-problemas
 
 [15]: ../config-reference.md#rule-level
 
