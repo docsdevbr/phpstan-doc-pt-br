@@ -1,5 +1,5 @@
 <!--
-source_url: https://github.com/phpstan/phpstan/blob/-/website/src/user-guide/getting-started.md
+source_url: https://github.com/phpstan/phpstan/blob/2.1.x/website/src/user-guide/getting-started.md
 revision: 65dc199c3c137db0ee1b05cf94c8fe65d53fedbd
 status: ready
 -->
